@@ -71,3 +71,26 @@ var binaryGap = function (n) {
 };
 
 console.log(binaryGap(22));
+
+
+//#27 Merge 2 Sorted Lists
+/*You are given the heads of two sorted linked lists list1 and list2.
+
+Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
+
+Return the head of the merged linked list. */
+var mergeTwoLists = function (list1, list2) {
+	//base cases
+	//if there's no list1 or list2, return the list2 or list1, respectively
+	//define an array of minNode and maxNode --
+	// ternary to check if list1's val is greater than list2's val, return [list2, list1] or
+	// if not, return [list1, list2] for the ascending order
+	if (!list1) return list2;
+	else if (!list2) return list1;
+	const [minNode, maxNode] =
+		list1.val > list2.val ? [list2, list1] : [list1, list2];
+
+	//recursive case
+	// return a new listNode as the final solution with the minNode val as the first value and the recursion through mergeTwoLists function (taking in the minNode.next and the maxnNode)
+	return new ListNode(minNode.val, mergeTwoLists(minNode.next, maxNode));
+};
