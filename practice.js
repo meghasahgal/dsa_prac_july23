@@ -85,8 +85,9 @@ var mergeTwoLists = function (list1, list2) {
 	//define an array of minNode and maxNode --
 	// ternary to check if list1's val is greater than list2's val, return [list2, list1] or
 	// if not, return [list1, list2] for the ascending order
-	if (!list1) return list2;
-	else if (!list2) return list1;
+	if (!list1 || !list2) {
+		return list1 || list2;
+	}
 	const [minNode, maxNode] =
 		list1.val > list2.val ? [list2, list1] : [list1, list2];
 
