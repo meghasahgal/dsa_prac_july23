@@ -95,3 +95,66 @@ var mergeTwoLists = function (list1, list2) {
 	// return a new listNode as the final solution with the minNode val as the first value and the recursion through mergeTwoLists function (taking in the minNode.next and the maxnNode)
 	return new ListNode(minNode.val, mergeTwoLists(minNode.next, maxNode));
 };
+
+//another solution:
+var mergeTwoLists = function (list1, list2) {
+	// If one of the list nodes is undefined, return the defined list node
+	if (!list1 || !list2) {
+		return list1 || list2;
+	}
+
+	// Compare which listNode has the smaller value
+	// and essentially have that listNode point to the next bigger value
+	// Ex:
+	// list1: 1 -> 2 -> 4
+	// list2: 1 -> 3 -> 4
+
+	// mergeTwoLists(1 -> 2 -> 4, 1 -> 3 -> 4)
+	// 1 ->
+	// mergeTwoLists(1 -> 2 -> 4, 3 -> 4)
+	// 1 -> 1 ->
+	// mergeTwoLists(2 -> 4, 3 -> 4)
+	// 1 -> 1 -> 2 ->
+	// mergeTwoLists(4, 3 -> 4)
+	// 1 -> 1 -> 2 -> 3 ->
+	// mergeTwoLists(4, 4)
+	// 1 -> 1 -> 2 -> 3 -> 4
+	// mergeTwoLists(4, null)
+	// 1 -> 1 -> 2 -> 3 -> 4 -> 4
+
+	if (list1.val < list2.val) {
+		list1.next = mergeTwoLists(list1.next, list2);
+		return list1;
+	} else {
+		list2.next = mergeTwoLists(list1, list2.next);
+		return list2;
+	}
+};
+
+
+
+/* # 26 Remove Duplicates from Sorted Array
+Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+
+Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially.
+The remaining elements of nums are not important as well as the size of nums.
+Return k.*/
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    //define a new set to get unique vals
+    var k = new Set(nums)
+    // define res to be an array per the set
+    var res = Array.from(k)
+    console.log(k, "set")
+    // iterate through the array and assign nums[i] to be equal to res[i]
+    for (i=0; i< res.length; i++){
+        nums[i]=res[i];
+    }
+    nums.length = res.length
+    return res.length
+};
