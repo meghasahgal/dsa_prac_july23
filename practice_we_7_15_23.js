@@ -54,38 +54,101 @@
 //  * @param {string} typed
 //  * @return {boolean}
 //  */
-var isLongPressedName = function(name, typed) {
-	// define arrays for name and type
-	const name_array = name.split('')
-	const typed_array = typed.split('')
-	// define a length var to check for the lengths -- if the typed array's length is less than or equal to the OG name array, return false
-	const typed_length = typed.typed_length
-	if (name.length >= typed_array.length) return false
-	console.log(name.length, "name length")
-	console.log(typed_array.length, "typed length")
-	//iterate through the typed array to check if the index vals at i are the same for name and type array
-	for(let i = 0; i < typed_array.length; i++){
-		//if the index vals are not the same, check to see if the current i and the previous i (i-1) in typed_array are the same
-		if (name_array[i] !== typed_array[i]){
-			if (typed_array[i]===typed_array[i-1]){
-				//splice off the letter i to continue the process if true
-				typed_array[i].splice(i, 1)
-				//decrement i to get the prev value since it's been cut off
-				i--
-			}
-			// where the previous val is not the same, return false
-			else{
-				return false
-			}
+// var isLongPressedName = function(name, typed) {
+// 	// define arrays for name and type
+// 	const name_array = name.split('')
+// 	const typed_array = typed.split('')
+// 	// define a length var to check for the lengths -- if the typed array's length is less than or equal to the OG name array, return false
+// 	const typed_length = typed.typed_length
+// 	if (name.length >= typed_array.length) return false
+// 	console.log(name.length, "name length")
+// 	console.log(typed_array.length, "typed length")
+// 	//iterate through the typed array to check if the index vals at i are the same for name and type array
+// 	for(let i = 0; i < typed_array.length; i++){
+// 		//if the index vals are not the same, check to see if the current i and the previous i (i-1) in typed_array are the same
+// 		if (name_array[i] !== typed_array[i]){
+// 			if (typed_array[i]===typed_array[i-1]){
+// 				//splice off the letter i to continue the process if true
+// 				typed_array[i].splice(i, 1)
+// 				//decrement i to get the prev value since it's been cut off
+// 				i--
+// 			}
+// 			// where the previous val is not the same, return false
+// 			else{
+// 				return false
+// 			}
 
 
-		}
+// 		}
 
-		// default to
-		return true;
+// 		// default to
+// 		return true;
 
-	}
+// 	}
 
-}
-// console.log(isLongPressedName("alex", "alexx")) // true
-console.log(isLongPressedName("alex", "alex"));
+// }
+// // console.log(isLongPressedName("alex", "alexx")) // true
+// console.log(isLongPressedName("alex", "alex")); //false
+//----------------------------------------------------------------
+
+/* #929. Unique Email Addresses
+
+// Every valid email consists of a local name and a domain name, separated by the '@' sign.
+Besides lowercase letters, the email may contain one or more '.' or '+'.
+
+// For example, in "alice@leetcode.com", "alice" is the local name, and "leetcode.com" is the domain name.
+// If you add periods '.' between some characters in the local name part of an email address,
+email sent there will be forwarded to the same address without dots in the local name. Note that this rule does not apply to domain names.
+
+// For example, "alice.z@leetcode.com" and "alicez@leetcode.com" forward to the same email address.
+// If you add a plus '+' in the local name, everything after the first plus sign will be ignored. This allows certain emails to be filtered. Note that this rule does not apply to domain names.
+
+// For example, "m.y+name@email.com" will be forwarded to "my@email.com".
+// It is possible to use both of these rules at the same time.
+
+// Given an array of strings emails where we send one email to each emails[i], return the number of different addresses that actually receive mails.
+
+
+
+// Example 1:
+
+// Input: emails = ["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]
+// Output: 2
+// Explanation: "testemail@leetcode.com" and "testemail@lee.tcode.com" actually receive mails.
+// Example 2:
+
+// Input: emails = ["a@leetcode.com","b@leetcode.com","c@leetcode.com"]
+// Output: 3
+
+
+// Constraints:
+
+// 1 <= emails.length <= 100
+// 1 <= emails[i].length <= 100
+// emails[i] consist of lowercase English letters, '+', '.' and '@'.
+// Each emails[i] contains exactly one '@' character.
+// All local and domain names are non-empty.
+// Local names do not start with a '+' character.
+// Domain names end with the ".com" suffix.
+
+-if an email has >1 @ signs, then it's not valid
+-if an email has an @ sign it the local name (everything before the @ sign) then everything after is ignored
+-will need to compare the emails and see which ones are unique; can take a set and get the size for the final result
+
+
+*/
+var numUniqueEmails = (emails) =>
+	new Set(
+		emails.map((email) => {
+			// const [local, domain] = email.split("@");
+			// console.log(`${local.split("+")}`); //test.email,alex
+			// console.log(`${local.split("+")[0]}`) // test.email
+			// console.log(`${local.split("+")[0].split(".")}`) // test,email
+			// console.log(`${local.split("+")[0].split(".").join("")}@${domain}`) // testemail@leetcode.com
+			// console.log(`${local.split("+")[0].split(".").join("")}@${domain}`);
+			return `${local.split("+")[0].split(".").join("")}@${domain}`;
+		})
+	).size;
+console.log(
+	numUniqueEmails(["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"])
+);//2
