@@ -140,7 +140,7 @@ email sent there will be forwarded to the same address without dots in the local
 var numUniqueEmails = (emails) =>
 	new Set(
 		emails.map((email) => {
-			// const [local, domain] = email.split("@");
+			const [local, domain] = email.split("@");
 			// console.log(`${local.split("+")}`); //test.email,alex
 			// console.log(`${local.split("+")[0]}`) // test.email
 			// console.log(`${local.split("+")[0].split(".")}`) // test,email
