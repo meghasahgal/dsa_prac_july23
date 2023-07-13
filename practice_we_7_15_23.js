@@ -159,20 +159,25 @@ email sent there will be forwarded to the same address without dots in the local
 // console.log(array1.indexOf(Math.max(...array1)));
 // // Expected output: 3
 
+// #941. Valid Mountain Array
+
+// Given an array of integers arr, return true if and only if it is a valid mountain array.
+
+// Recall that arr is a mountain array if and only if:
+
+// arr.length >= 3
+// There exists some i with 0 < i < arr.length - 1 such that:
+// arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+// arr[i] > arr[i + 1]  > ... > arr[arr.length - 1]
+
 var validMountainArray = function (arr) {
 	var max = Math.max(...arr);
 	var max_i = arr.indexOf(max)
-	console.log(max_i, "max index");
+	// console.log(max_i, "max index");
 	var lower_i = max_i-1
 	var upper_i = max_i+1
-	console.log(upper_i, "index upper")
-	console.log(lower_i, "lower")
-	console.log(max, "max")
-	console.log(arr.indexOf(max), "index max");
-	console.log(arr[lower_i], "lower val")
-	console.log(arr[upper_i], "upper val")
 
-	// for (let i = 0; i < arr.length; i++){
+
 	//if the value of max is greater than the value of the index of max + 1, &&
 	// if the value of max is greater than the value of the index of max-1, return true
 	//else return false
