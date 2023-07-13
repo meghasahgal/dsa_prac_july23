@@ -136,19 +136,53 @@ email sent there will be forwarded to the same address without dots in the local
 -will need to compare the emails and see which ones are unique; can take a set and get the size for the final result
 
 
-*/
-var numUniqueEmails = (emails) =>
-	new Set(
-		emails.map((email) => {
-			const [local, domain] = email.split("@");
-			// console.log(`${local.split("+")}`); //test.email,alex
-			// console.log(`${local.split("+")[0]}`) // test.email
-			// console.log(`${local.split("+")[0].split(".")}`) // test,email
-			// console.log(`${local.split("+")[0].split(".").join("")}@${domain}`) // testemail@leetcode.com
-			// console.log(`${local.split("+")[0].split(".").join("")}@${domain}`);
-			return `${local.split("+")[0].split(".").join("")}@${domain}`;
-		})
-	).size;
-console.log(
-	numUniqueEmails(["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"])
-);//2
+// */
+// var numUniqueEmails = (emails) =>
+// 	new Set(
+// 		emails.map((email) => {
+// 			const [local, domain] = email.split("@");
+// 			// console.log(`${local.split("+")}`); //test.email,alex
+// 			// console.log(`${local.split("+")[0]}`) // test.email
+// 			// console.log(`${local.split("+")[0].split(".")}`) // test,email
+// 			// console.log(`${local.split("+")[0].split(".").join("")}@${domain}`) // testemail@leetcode.com
+// 			// console.log(`${local.split("+")[0].split(".").join("")}@${domain}`);
+// 			return `${local.split("+")[0].split(".").join("")}@${domain}`;
+// 		})
+// 	).size;
+// console.log(
+// 	numUniqueEmails(["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"])
+// );//2
+
+// ---
+// const array1 = [1, 3, 2];
+
+// console.log(array1.indexOf(Math.max(...array1)));
+// // Expected output: 3
+
+var validMountainArray = function (arr) {
+	var max = Math.max(...arr);
+	var max_i = arr.indexOf(max)
+	console.log(max_i, "max index");
+	var lower_i = max_i-1
+	var upper_i = max_i+1
+	console.log(upper_i, "index upper")
+	console.log(lower_i, "lower")
+	console.log(max, "max")
+	console.log(arr.indexOf(max), "index max");
+	console.log(arr[lower_i], "lower val")
+	console.log(arr[upper_i], "upper val")
+
+	// for (let i = 0; i < arr.length; i++){
+	//if the value of max is greater than the value of the index of max + 1, &&
+	// if the value of max is greater than the value of the index of max-1, return true
+	//else return false
+	if (
+		arr[arr.indexOf(max)] > arr[lower_i] &&
+		arr[arr.indexOf(max)] > arr[upper_i]
+	) {
+		return true;
+	} else {
+		return false;
+	}
+};
+console.log(validMountainArray([0, 3, 2, 1])); //true
