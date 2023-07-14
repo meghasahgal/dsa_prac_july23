@@ -171,23 +171,24 @@ email sent there will be forwarded to the same address without dots in the local
 // arr[i] > arr[i + 1]  > ... > arr[arr.length - 1]
 
 var validMountainArray = function (arr) {
-	var max = Math.max(...arr);
-	var max_i = arr.indexOf(max)
-	// console.log(max_i, "max index");
-	var lower_i = max_i-1
-	var upper_i = max_i+1
+	//cases for false:
+	//if the array's length is less than 3, then can't have an up and down and a peak in the    middle
+	//if arr's value at prior index is greater than the value at the next index
+	//if not peak and the val at i is less than or equal to the val at i+1
+	//
 
-
-	//if the value of max is greater than the value of the index of max + 1, &&
-	// if the value of max is greater than the value of the index of max-1, return true
-	//else return false
-	if (
-		arr[arr.indexOf(max)] > arr[lower_i] &&
-		arr[arr.indexOf(max)] > arr[upper_i]
-	) {
-		return true;
-	} else {
-		return false;
+	if (arr.length < 3 || arr[0] >= arr[1]) return false;
+	//define a pointer and set it to true
+	let peak = true;
+	//iterate throug the arr
+	for (let i = 0; i < arr.length - 1; i++) {
+		if (peak && arr[i] > arr[i + 1]) {
+			peak = false;
+		} else if ((!peak && arr[i] <= arr[i + 1]) || arr[i] === arr[i + 1]) {
+			return false;
+		}
 	}
+	return peak ? false : true;
 };
+
 console.log(validMountainArray([0, 3, 2, 1])); //true
