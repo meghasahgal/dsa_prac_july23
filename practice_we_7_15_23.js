@@ -170,25 +170,72 @@ email sent there will be forwarded to the same address without dots in the local
 // arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
 // arr[i] > arr[i + 1]  > ... > arr[arr.length - 1]
 
-var validMountainArray = function (arr) {
-	//cases for false:
-	//if the array's length is less than 3, then can't have an up and down and a peak in the    middle
-	//if arr's value at prior index is greater than the value at the next index
-	//if not peak and the val at i is less than or equal to the val at i+1
-	//
+// var validMountainArray = function (arr) {
+// 	//cases for false:
+// 	//if the array's length is less than 3, then can't have an up and down and a peak in the    middle
+// 	//if arr's value at prior index is greater than the value at the next index
+// 	//if not peak and the val at i is less than or equal to the val at i+1
+// 	//
 
-	if (arr.length < 3 || arr[0] >= arr[1]) return false;
-	//define a pointer and set it to true
-	let peak = true;
-	//iterate throug the arr
-	for (let i = 0; i < arr.length - 1; i++) {
-		if (peak && arr[i] > arr[i + 1]) {
-			peak = false;
-		} else if ((!peak && arr[i] <= arr[i + 1]) || arr[i] === arr[i + 1]) {
-			return false;
-		}
-	}
-	return peak ? false : true;
+// 	if (arr.length < 3 || arr[0] >= arr[1]) return false;
+// 	//define a pointer and set it to true
+// 	let peak = true;
+// 	//iterate throug the arr
+// 	for (let i = 0; i < arr.length - 1; i++) {
+// 		if (peak && arr[i] > arr[i + 1]) {
+// 			peak = false;
+// 		} else if ((!peak && arr[i] <= arr[i + 1]) || arr[i] === arr[i + 1]) {
+// 			return false;
+// 		}
+// 	}
+// 	return peak ? false : true;
+// };
+
+// console.log(validMountainArray([0, 3, 2, 1])); //true
+//----------------------------------------------------------------
+
+// #121. Best Time to Buy and Sell Stock
+
+// You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+// You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+// Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+// Example 1:
+
+// Input: prices = [7,1,5,3,6,4]
+// Output: 5
+// Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+// Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+// Example 2:
+
+// Input: prices = [7,6,4,3,1]
+// Output: 0
+// Explanation: In this case, no transactions are done and the max profit = 0.
+
+
+// Constraints:
+
+// 1 <= prices.length <= 105
+// 0 <= prices[i] <= 104
+
+var maxProfit = function (prices) {
+	var maxProfit = function(prices) {
+   //establish a max profit and a min pointer
+    let maxProfit = 0;
+    let minPrice = prices[0];
+    //iterate through prices array
+     for(let i = 0; i<prices.length; i++){
+         //find the min price between the current price and the min price
+        minPrice = Math.min(minPrice, prices[i]);
+        // find the current profit
+        let current  = prices[i] - minPrice;
+		// get the maxProfit by comparing the current profit and the value in maxProfit
+        maxProfit = Math.max(current, maxProfit);
+
+     }
+   return maxProfit
 };
 
-console.log(validMountainArray([0, 3, 2, 1])); //true
+console.log(maxProfit([7, 1, 5, 3, 6, 4]));
