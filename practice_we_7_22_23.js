@@ -37,30 +37,56 @@
 
 // Input: s = "(]"
 // Output: false
-/**
- * @param {string} s
- * @return {boolean}
- */
-var isValid = function(s) {
-    // change to array
-    let stack = s.split('');
-    //if stack is an uneven length, there is no closing bracket for one or more opening brackets, so return false
-    if(stack.length % 2 !=0) return false;
-    let res =[]
-    while(stack.length){
-        let last = stack.pop()
-        //check if last element is a closing bracket
-        if (last === ')' || last === '}' || last === ']'){
-            res.push(last)
-        }
-        else{
-            let temp = res.pop()
-            //check if the last ele and the temp ele are not opening and closing; return false if so.
-            if (!((last ==='(' && temp===')') || (last ==='[' && temp === ']') || (last==='{' && temp ==='}'))){
-                return false;
-            }
-        }
-    }
-    if(res.length) return false;
-    return true;
-};
+// var isValid = function(s) {
+//     // change to array
+//     let stack = s.split('');
+//     //if stack is an uneven length, there is no closing bracket for one or more opening brackets, so return false
+//     if(stack.length % 2 !=0) return false;
+//     let res =[]
+//     // console.log(res, "res")
+//     while(stack.length){
+//         let last = stack.pop()
+//         console.log(last, "last")
+//         //check if last element is a closing bracket
+//         if (last === ')' || last === '}' || last === ']'){
+//             res.push(last)
+//             console.log(res, "res after pushing last")
+//         }
+//         else{
+//             //check if last element is an opening bracket
+//             let temp = res.pop()
+//             console.log(temp, "temp")
+//             //check if the last ele and the temp ele are not opening and closing; return false if so.
+//             if (!((last ==='(' && temp===')') || (last ==='[' && temp === ']') || (last==='{' && temp ==='}'))){
+//                 return false;
+//             }
+//         }
+//     }
+//     if(res.length) return false;
+//     return true;
+// };
+// console.log(isValid("()[]{}"));
+
+// --
+// var removeElement = function (nums, val) {
+// 	return nums.filter(x => x !== val)
+//     };
+
+// var removeElement = function (nums, val) {
+//     //establish a counter
+// 	let count = 0;
+//     //iterate through nums
+// 	for (let i = 0; i < nums.length; i++) {
+//         // to see if each number is not equal to the value
+// 		if (nums[i] !== val) {
+//             //if the number is not equal to the value, set nums @ count index to the nums[i]
+// 			nums[count] = nums[i];
+//             //increment the counter
+// 			count++;
+// 		}
+// 	}
+// 	return count;
+// };
+
+
+// console.log(removeElement([3, 2, 2, 3], 3)) //2
