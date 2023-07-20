@@ -68,6 +68,15 @@
 // console.log(isValid("()[]{}"));
 
 // --
+// #27. Remove Element
+
+// Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+// Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+// Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+// Return k.
+
 // var removeElement = function (nums, val) {
 // 	return nums.filter(x => x !== val)
 //     };
@@ -90,3 +99,88 @@
 
 
 // console.log(removeElement([3, 2, 2, 3], 3)) //2
+
+
+// 207. Course Schedule
+
+// There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+
+// For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+// Return true if you can finish all courses. Otherwise, return false.
+
+
+var canFinish = function (numCourses, prerequisites) {
+	const hash = {};
+	for (let course = 0; course < numCourses; course++) {
+		hash[course] = [];
+	}
+	for (let [course, prereq] of prerequisites) {
+		hash[course].push(prereq);
+	}
+	const visited = new Set(); // used for cycle detection
+	const dfs = (course) => {
+		if (visited.has(course)) return false;
+		if (hash[course].length === 0) return true;
+		visited.add(course);
+		for (let prereq of hash[course]) {
+			if (!dfs(prereq)) return false;
+		}
+		visited.delete(course);
+		hash[course] = []; // this represents that the course has been validated
+		return true;
+	};
+	for (const course in hash) {
+		// we need to go through each course in the case of unconnected graph
+		if (!dfs(course)) return false;
+	}
+
+	return true;
+};
+
+
+// var canFinish = function (numCourses, prerequisites) {
+// 	//define obj vars for adj list and visited nodes
+// 	//The visited object is used to keep track of which node we are currently at, once we travel through all the children, and see that there is no re-occurance of the current node (a cycle) we can remove the current node from the visited.  If there is a cycle, need to return false.
+
+// 	// create an adjacency list of nodes needed to be able to take course; iterate through prerequistes array
+// 	const preMap = {};
+// 	const visited = {};
+
+// 	// build the adacency list
+// 	for (let i = 0; i < prerequisites.length; i++) {
+// 		if (preMap[prerequisites[i][0]] === undefined) {
+// 			preMap[prerequisites[i][0]] = [prerequisites[i][1]];
+// 		} else {
+// 			preMap[prerequisites[i][0]].push(prerequisites[i][1]);
+// 		}
+// 	}
+// 	console.log(preMap);
+// 	const dfs = (node) => {
+// 		if (visited[node]) {
+// 			return false;
+// 		}
+// 		if (preMap[node] !== undefined) {
+// 			if (preMap[node].length === 0) {
+// 				return true;
+// 			}
+
+// 			visited[node] = true;
+// 			for (let val of preMap[node]) {
+// 				if (!dfs(val)) {
+// 					return false;
+// 				}
+// 			}
+// 			visited[node] = false;
+
+// 			preMap[node] = [];
+// 		}
+// 		return true;
+// 	};
+
+// 	for (let key in preMap) {
+// 		if (!dfs(key)) {
+// 			return false;
+// 		}
+// 	}
+// 	return true;
+// };
