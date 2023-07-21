@@ -184,3 +184,30 @@ var canFinish = function (numCourses, prerequisites) {
 // 	}
 // 	return true;
 // };
+
+
+//--
+// #137. Single Number II
+
+// Given an integer array nums where every element appears three times except for one, which appears exactly once. Find the single element and return it.
+
+// You must implement a solution with a linear runtime complexity and use only constant extra space.
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+    //create an obj that holds the counts of each num
+    let res ={}
+    for (let num of nums){
+       res[num] = ++res[num] || 1;
+    }
+    //return the num (key) with the count of 1
+    for (let key in res){
+       if(res[key]===1){
+          return key
+       }
+    }
+};
+
+console.log(singleNumber([2,2,3,2])) // 3
