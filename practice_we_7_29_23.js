@@ -126,20 +126,38 @@ Given a string s consisting of words and spaces, return the length of the last w
 // Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
 
 // You must implement a solution with a linear runtime complexity and use only constant extra space.
-var singleNumber = function (nums) {
-	//edge case if there's only 1 number in the array
-	if (nums.length === 1) {
-		return nums[0];
-	}
-	//sort in ascending aorder
-	nums.sort((a, b) => a - b);
-	for (let i = 0; i < nums.length; i++) {
-		//check to see if the prev and next numbers are not the same
-		if (nums[i] !== nums[i + 1]) {
-			//if not return nums[i]
-			return nums[i];
-		} else {
-			i++;
-		}
-	}
-};
+// var singleNumber = function (nums) {
+// 	//edge case if there's only 1 number in the array
+// 	if (nums.length === 1) {
+// 		return nums[0];
+// 	}
+// 	//sort in ascending aorder
+// 	nums.sort((a, b) => a - b);
+// 	for (let i = 0; i < nums.length; i++) {
+// 		//check to see if the prev and next numbers are not the same
+// 		if (nums[i] !== nums[i + 1]) {
+// 			//if not return nums[i]
+// 			return nums[i];
+// 		} else {
+// 			i++;
+// 		}
+// 	}
+// };
+
+// #268. Missing Number
+
+// Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+var missingNumber = function (nums) {
+   nums.sort((a, b) => a-b);
+   console.log(nums, "nums")
+
+    for(var i=0; i < nums.length; i++){
+       //missing number should be the same as the index val when sorted
+        if( i !== nums[i]) return i;
+        console.log(i, "i")
+        console.log(nums[i], "nums[i]")
+    }
+    console.log(nums.length, "length")
+    return nums.length;
+}
+console.log(nums[1,3]) //2
