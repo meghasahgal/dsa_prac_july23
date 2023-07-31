@@ -110,7 +110,7 @@ Given a string s consisting of words and spaces, return the length of the last w
 //  * @return {number}
 //  */
 // var lengthOfLastWord = function (s) {
-// 	//remove additional spaces with regex
+// 	//remove additionalp spaces with regex
 // 	//The trim() method removes whitespace from both ends of a string and returns a new string, without modifying the original string.
 // 	newString = s.trim();
 // 	let changed = newString.split(" ");
@@ -147,17 +147,50 @@ Given a string s consisting of words and spaces, return the length of the last w
 // #268. Missing Number
 
 // Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
-var missingNumber = function (nums) {
-   nums.sort((a, b) => a-b);
-   console.log(nums, "nums")
+// var missingNumber = function (nums) {
+//    nums.sort((a, b) => a-b);
+//    console.log(nums, "nums")
 
-    for(var i=0; i < nums.length; i++){
-       //missing number should be the same as the index val when sorted
-        if( i !== nums[i]) return i;
-        console.log(i, "i")
-        console.log(nums[i], "nums[i]")
-    }
-    console.log(nums.length, "length")
-    return nums.length;
-}
-console.log(nums[1,3]) //2
+//     for(var i=0; i < nums.length; i++){
+//        //missing number should be the same as the index val when sorted
+//         if( i !== nums[i]) return i;
+//         console.log(i, "i")
+//         console.log(nums[i], "nums[i]")
+//     }
+//     console.log(nums.length, "length")
+//     return nums.length;
+// }
+// console.log(nums[1,3]) //2
+
+//
+// # 7. Reverse Integer
+// Medium
+
+// Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+
+// Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function (x) {
+	const minInteger = Math.pow(-2, 31);
+	const maxInteger = Math.pow(2, 31) - 1;
+
+	//reverse the chars by changing the num to a string and then an array so that we can reverse and join the words
+	const reversed = x.toString().split('').reverse().join("");
+	//check for vals
+	if (x < 0) {
+		//duplicate the array and change it back to a number
+		const result = Number(`-${reversed.slice(0, reversed.length-1)}`);
+		// If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+		return result < minInteger ? 0 : result;
+	}
+	// if x > 0
+	else {
+		const result = Number(reversed);
+		return result > maxInteger ? 0 : result;
+	}
+};
+
+console.log(reverse(321)) //123
