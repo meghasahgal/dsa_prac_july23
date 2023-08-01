@@ -168,29 +168,67 @@ Given a string s consisting of words and spaces, return the length of the last w
 
 // Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
 
-// Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+// // Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+// /**
+//  * @param {number} x
+//  * @return {number}
+//  */
+// var reverse = function (x) {
+// 	const minInteger = Math.pow(-2, 31);
+// 	const maxInteger = Math.pow(2, 31) - 1;
+
+// 	//reverse the chars by changing the num to a string and then an array so that we can reverse and join the words
+// 	const reversed = x.toString().split('').reverse().join("");
+//     console.log(reversed, "reversed")
+// 	//check for vals
+// 	if (x < 0) {
+// 		//duplicate the array and change it back to a number
+// 		const result = Number(`-${reversed.slice(0, reversed.length-1)}`);
+//         console.log(result, "result1")
+// 		// If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+// 		return result < minInteger ? 0 : result;
+// 	}
+// 	// if x > 0
+// 	else {
+// 		const result = Number(reversed);
+//         console.log(result, "result2");
+
+// 		return result > maxInteger ? 0 : result;
+// 	}
+// };
+
+// console.log(reverse(321)) //123
+
+
+// 169. Majority Element
+
+// Given an array nums of size n, return the majority element.
+
+// The majority element is the element that appears more than ⌊n / 2⌋ times.
+// You may assume that the majority element always exists in the array.
 /**
- * @param {number} x
+ * @param {number[]} nums
  * @return {number}
  */
-var reverse = function (x) {
-	const minInteger = Math.pow(-2, 31);
-	const maxInteger = Math.pow(2, 31) - 1;
+var majorityElement = function(nums) {
+    //find n = length
 
-	//reverse the chars by changing the num to a string and then an array so that we can reverse and join the words
-	const reversed = x.toString().split('').reverse().join("");
-	//check for vals
-	if (x < 0) {
-		//duplicate the array and change it back to a number
-		const result = Number(`-${reversed.slice(0, reversed.length-1)}`);
-		// If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
-		return result < minInteger ? 0 : result;
-	}
-	// if x > 0
-	else {
-		const result = Number(reversed);
-		return result > maxInteger ? 0 : result;
-	}
+    let n = nums.length
+    let majority = Math.floor(n/2)
+    let res = {}
+    //count w/ obj
+    for(let i = 0; i < n; i++){
+        // if nums[i] exists, increment the count
+      if(res[nums[i]]){
+        res[nums[i]]++
+      }
+      // else set count to 1
+      else {
+        res[nums[i]] = 1
+      }
+      //check if nums[i] is greater than the majority and resturn nums[i], the number, if it is 
+      if(res[nums[i]] > majority){
+        return nums[i]
+      }
+    }
 };
-
-console.log(reverse(321)) //123
