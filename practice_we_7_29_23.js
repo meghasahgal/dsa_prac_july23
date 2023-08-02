@@ -207,28 +207,59 @@ Given a string s consisting of words and spaces, return the length of the last w
 // The majority element is the element that appears more than ⌊n / 2⌋ times.
 // You may assume that the majority element always exists in the array.
 /**
- * @param {number[]} nums
- * @return {number}
- */
-var majorityElement = function(nums) {
-    //find n = length
+//  * @param {number[]} nums
+//  * @return {number}
+//  */
+// var majorityElement = function(nums) {
+//     //find n = length
 
-    let n = nums.length
-    let majority = Math.floor(n/2)
-    let res = {}
-    //count w/ obj
-    for(let i = 0; i < n; i++){
-        // if nums[i] exists, increment the count
-      if(res[nums[i]]){
-        res[nums[i]]++
-      }
-      // else set count to 1
-      else {
-        res[nums[i]] = 1
-      }
-      //check if nums[i] is greater than the majority and resturn nums[i], the number, if it is 
-      if(res[nums[i]] > majority){
-        return nums[i]
-      }
-    }
+//     let n = nums.length
+//     let majority = Math.floor(n/2)
+//     let res = {}
+//     //count w/ obj
+//     for(let i = 0; i < n; i++){
+//         // if nums[i] exists, increment the count
+//       if(res[nums[i]]){
+//         res[nums[i]]++
+//       }
+//       // else set count to 1
+//       else {
+//         res[nums[i]] = 1
+//       }
+//       //check if nums[i] is greater than the majority and resturn nums[i], the number, if it is
+//       if(res[nums[i]] > majority){
+//         return nums[i]
+//       }
+//     }
+// };
+
+// 189. Rotate Array
+
+// Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+
+/**
+//  * @param {number[]} nums
+//  * @param {number} k
+//  * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var rotate = function(nums, k) {
+   if(k < nums.length){
+       // take out the k number of nums
+       const shaved = nums.splice(nums.length-k)
+    //    console.log(shaved, "shaved")
+       // place them in the front of the array
+       nums.unshift(...shaved)
+    //    console.log(nums, "nums")
+
+   }
+   if (k > nums.length){
+       // take out the remainder of the nums
+       const shaved = nums.splice(nums.length - (k % nums.length))
+        //place them in the front of the array
+        nums.unshift(...shaved)
+
+   }
+
 };
+
+console.log(rotate([1, 2, 3, 4, 5, 6, 7], 3));
