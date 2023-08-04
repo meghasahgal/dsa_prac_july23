@@ -237,29 +237,49 @@ Given a string s consisting of words and spaces, return the length of the last w
 
 // Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
 
-/**
-//  * @param {number[]} nums
-//  * @param {number} k
-//  * @return {void} Do not return anything, modify nums in-place instead.
- */
-var rotate = function(nums, k) {
-   if(k < nums.length){
-       // take out the k number of nums
-       const shaved = nums.splice(nums.length-k)
-    //    console.log(shaved, "shaved")
-       // place them in the front of the array
-       nums.unshift(...shaved)
-    //    console.log(nums, "nums")
+// /**
+// //  * @param {number[]} nums
+// //  * @param {number} k
+// //  * @return {void} Do not return anything, modify nums in-place instead.
+//  */
+// var rotate = function(nums, k) {
+//    if(k < nums.length){
+//        // take out the k number of nums
+//        const shaved = nums.splice(nums.length-k)
+//     //    console.log(shaved, "shaved")
+//        // place them in the front of the array
+//        nums.unshift(...shaved)
+//     //    console.log(nums, "nums")
 
-   }
-   if (k > nums.length){
-       // take out the remainder of the nums
-       const shaved = nums.splice(nums.length - (k % nums.length))
-        //place them in the front of the array
-        nums.unshift(...shaved)
+//    }
+//    if (k > nums.length){
+//        // take out the remainder of the nums
+//        const shaved = nums.splice(nums.length - (k % nums.length))
+//         //place them in the front of the array
+//         nums.unshift(...shaved)
 
-   }
+//    }
 
+// };
+
+// console.log(rotate([1, 2, 3, 4, 5, 6, 7], 3));
+// #605 - CanPlaceFlowers
+// You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
+
+// Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n,
+// return true if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule and false otherwise.
+
+var canPlaceFlowers = function(flowerbed, n) {
+    // return false if [1,1,1] (space, before and after space is 1)
+    // return true if count >= number of flowers
+    // create a count
+    let count = 0;
+    for (let i = 0; i < flowerbed.length; i++){
+        if(!flowerbed[i-1] && !flowerbed[i+1] && !flowerbed[i]){
+            flowerbed[i] = 1;
+            count++
+        }
+    }
+    return count >=n
 };
-
-console.log(rotate([1, 2, 3, 4, 5, 6, 7], 3));
+console.log(canPlaceFlowers([1, 0, 0, 0, 1], 1)); //true
