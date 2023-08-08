@@ -331,20 +331,53 @@ Given a string s consisting of words and spaces, return the length of the last w
 //  * @param {number[]} nums
 //  * @return {boolean}
 //  */
-var isGood = function(nums) {
-    //sort the nums arr
-    let sorted = nums.sort((a, b)=> a-b)
-    console.log(sorted, "sorted")
-    //get last number called last
-    let last = nums[nums.length-1]
-    //return false if last number + 1 is not equal to the length
-    if(last + 1 !== nums.length) return false
+// var isGood = function(nums) {
+//     //sort the nums arr
+//     let sorted = nums.sort((a, b)=> a-b)
+//     console.log(sorted, "sorted")
+//     //get last number called last
+//     let last = nums[nums.length-1]
+//     //return false if last number + 1 is not equal to the length
+//     if(last + 1 !== nums.length) return false
 
-    //iterate through arr until the last number to see if nums[i] is equal to i+1 (sorted already)
-    for (let i = 0; i < last; i++){
-        if(nums[i] !== i+1){
-            return false
+//     //iterate through arr until the last number to see if nums[i] is equal to i+1 (sorted already)
+//     for (let i = 0; i < last; i++){
+//         if(nums[i] !== i+1){
+//             return false
+//         }
+//     }
+// return true;
+// }
+
+
+//______
+// #110 Balanced Binary Tree - Given a binary tree, determine if it is height-balanced.
+
+
+ //helper function to get the height
+
+const height = (node) => {
+        //if no node return a height of zero
+        if(node === null){
+            return 0;
         }
+        // return the max height of the left and right nodes + 1
+        return 1 + Math.max(height(node.left), height(node.right))
     }
-return true;
-}
+// recursive DFS sol
+var isBalanced = function(root) {
+    if(root === null){
+        return true;
+    }
+    else {
+        let difference = Math.abs(height(root.left) - height(root.right))
+        //return true or false depending on if the difference is < 2 (exactly 1)
+        return difference < 2
+        && isBalanced(root.left)
+        && isBalanced(root.right)
+    }
+
+
+
+
+};
