@@ -289,29 +289,62 @@ Given a string s consisting of words and spaces, return the length of the last w
 // console.log(canPlaceFlowers([1,0,0,0,1], n = 2)); //false
 
 
-var plusOne = function(digits) {
-    let lastindex = digits.length-1
-    //check for edge case where last number is not equal to 9, if not, icrement it by 1
-    if(digits[lastindex]!==9){
-        digits[lastindex]++
-    }
-    else{
-        //while last digit is equal to 9, set it to 0 and; need to decrement the last index to check for additional 9s
-        while(digits[lastindex] ===9){
-            digits[lastindex] = 0;
-            lastindex--
-            console.log(lastindex, "lastindex")
-        }
-        if(lastindex <0 ){
-            digits.unshift(1)
-            console.log(digits.unshift(1), "unshifted digits")
-        }
-        else {
-            digits[lastindex]++
-            console.log(digits[lastindex], "digits[lastindex]")
-        }
-    }
-    return digits
-};
+// var plusOne = function(digits) {
+//     let lastindex = digits.length-1
+//     //check for edge case where last number is not equal to 9, if not, icrement it by 1
+//     if(digits[lastindex]!==9){
+//         digits[lastindex]++
+//     }
+//     else{
+//         //while last digit is equal to 9, set it to 0 and; need to decrement the last index to check for additional 9s
+//         while(digits[lastindex] ===9){
+//             digits[lastindex] = 0;
+//             lastindex--
+//             console.log(lastindex, "lastindex")
+//         }
+//         if(lastindex <0 ){
+//             //if last index is < 0, add 1 by unshifting
+//             digits.unshift(1)
+//             console.log(digits.unshift(1), "unshifted digits")
+//         }
+//         else {
+//             digits[lastindex]++
+//             console.log(digits[lastindex], "digits[lastindex]")
+//         }
+//     }
+//     return digits
+// };
 
-console.log(plusOne([9,9]))
+// console.log(plusOne([9,9])) //[1,0,0]
+
+
+2784. Check if Array is Good
+
+// You are given an integer array nums. We consider an array good if it is a permutation of an array base[n].
+
+// base[n] = [1, 2, ..., n - 1, n, n] (in other words, it is an array of length n + 1 which contains 1 to n - 1 exactly once, plus two occurrences of n). For example, base[1] = [1, 1] and base[3] = [1, 2, 3, 3].
+
+// Return true if the given array is good, otherwise return false.
+
+// Note: A permutation of integers represents an arrangement of these numbers.
+// *
+//  * @param {number[]} nums
+//  * @return {boolean}
+//  */
+var isGood = function(nums) {
+    //sort the nums arr
+    let sorted = nums.sort((a, b)=> a-b)
+    console.log(sorted, "sorted")
+    //get last number called last
+    let last = nums[nums.length-1]
+    //return false if last number + 1 is not equal to the length
+    if(last + 1 !== nums.length) return false
+
+    //iterate through arr until the last number to see if nums[i] is equal to i+1 (sorted already)
+    for (let i = 0; i < last; i++){
+        if(nums[i] !== i+1){
+            return false
+        }
+    }
+return true;
+}
