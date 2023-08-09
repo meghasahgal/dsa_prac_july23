@@ -318,7 +318,7 @@ Given a string s consisting of words and spaces, return the length of the last w
 // console.log(plusOne([9,9])) //[1,0,0]
 
 
-2784. Check if Array is Good
+// 2784. Check if Array is Good
 
 // You are given an integer array nums. We consider an array good if it is a permutation of an array base[n].
 
@@ -356,28 +356,44 @@ Given a string s consisting of words and spaces, return the length of the last w
 
  //helper function to get the height
 
-const height = (node) => {
-        //if no node return a height of zero
-        if(node === null){
-            return 0;
-        }
-        // return the max height of the left and right nodes + 1
-        return 1 + Math.max(height(node.left), height(node.right))
-    }
-// recursive DFS sol
-var isBalanced = function(root) {
-    if(root === null){
-        return true;
-    }
-    else {
-        let difference = Math.abs(height(root.left) - height(root.right))
-        //return true or false depending on if the difference is < 2 (exactly 1)
-        return difference < 2
-        && isBalanced(root.left)
-        && isBalanced(root.right)
-    }
+// const height = (node) => {
+//         //if no node return a height of zero
+//         if(node === null){
+//             return 0;
+//         }
+//         // return the max height of the left and right nodes + 1
+//         return 1 + Math.max(height(node.left), height(node.right))
+//     }
+// // recursive DFS sol
+// var isBalanced = function(root) {
+//     if(root === null){
+//         return true;
+//     }
+//     else {
+//         let difference = Math.abs(height(root.left) - height(root.right))
+//         //return true or false depending on if the difference is < 2 (exactly 1)
+//         return difference < 2
+//         && isBalanced(root.left)
+//         && isBalanced(root.right)
+//     }
 
 
+// };
 
 
+// 383. Ransom Note
+
+// Companies
+// Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+
+// Each letter in magazine can only be used once in ransomNote.
+var canConstruct = function(ransomNote, magazine) {
+  for (let char of magazine){
+      //replace char in ransomNote with an empty string if char is found in it
+      ransomNote = ransomNote.replace(char, "")
+  }
+    //if ransomNote is an empty string, return true, else false
+    return (!ransomNote)
 };
+
+console.log(canConstruct("aa", "aab"))//true
