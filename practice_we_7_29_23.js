@@ -386,14 +386,88 @@ Given a string s consisting of words and spaces, return the length of the last w
 // Companies
 // Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
 
-// Each letter in magazine can only be used once in ransomNote.
-var canConstruct = function(ransomNote, magazine) {
-  for (let char of magazine){
-      //replace char in ransomNote with an empty string if char is found in it
-      ransomNote = ransomNote.replace(char, "")
-  }
-    //if ransomNote is an empty string, return true, else false
-    return (!ransomNote)
+// // Each letter in magazine can only be used once in ransomNote.
+// var canConstruct = function(ransomNote, magazine) {
+//   for (let char of magazine){
+//       //replace char in ransomNote with an empty string if char is found in it
+//       ransomNote = ransomNote.replace(char, "")
+//   }
+//     //if ransomNote is an empty string, return true, else false
+//     return (!ransomNote)
+// };
+
+// console.log(canConstruct("aa", "aab"))//true
+
+
+// #424 Longest Repeating Character
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var characterReplacement = function(s, k) {
+   //use a hash to get counts; used to transform a given key into a specific slot index. it is used to map each and every possible key into a unique slot index.
+   // use two pointers for right and left
+   let hash = {};
+   let res = 0;
+   let left = 0;
+   let max = 0;
+
+   for(let right = 0; right < s.length; right++){
+     //if char exists, add 1, else assign to 1
+     if(hash[s[right]]) {
+       hash[s[right]]++
+     }
+     else{
+       hash[s[right]] = 1;
+
+     }
+     console.log(right, "right")
+     console.log(hash[s[right]], "hash key as s at right")
+     // max is maxiumn of the max and current hash of the key at the s's right index
+       max = Math.max(max, hash[s[right]])
+       console.log(max, "max between max and the key at the right index")
+
+       while (right - left +1 - max > k){
+         hash[s[left]]--;
+         left++
+       }
+       res=Math.max(res, right-left+1)
+       console.log(res, "res")
+       console.log(left, "left")
+
+   }
+   return res;
+
+
 };
 
-console.log(canConstruct("aa", "aab"))//true
+console.log(characterReplacement("AABABBA", 1));
+//another sol
+// const characterReplacement = (s, k) => {
+// 	const map = {};
+// 	let max = 0; // max window
+// 	let maxCount = 0; // count of most frequent element
+
+// 	let L = 0;
+// 	let R = 0;
+
+// 	while (R < s.length) {
+// 		const cv = s[R];
+
+// 		map[cv] = map[cv] + 1 || 1; // add/update count
+// 		maxCount = Math.max(maxCount, map[cv]); // update max count
+
+// 		// length of window -- count of most frequent > k
+// 		// character replacement threshold is capped
+// 		while (R - L + 1 - maxCount > k) {
+// 			map[s[L]]--; // decrement count of left most character
+// 			L++; // move window
+// 		}
+
+// 		max = Math.max(max, R - L + 1);
+// 		R++;
+// 	}
+
+// 	return max;
+// };
