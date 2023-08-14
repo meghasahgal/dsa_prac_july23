@@ -478,24 +478,44 @@ console.log(characterReplacement("AABABBA", 1));
 // If not, return the index where it would be if it were inserted in order.
 
 // You must write an algorithm with O(log n) runtime complexity.
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number}
- */
-var searchInsert = function(nums, target) {
-  //establish a count var for the secondary case if the target doesn't exist
-    let count = 0
-    for (let i = 0; i < nums.length; i++){
-        if(nums[i]===target){
-            return i
-        }
-        else {
-          //check if the num is less than the target -- if it is, the count is incremented and will be one less 
-            if(nums[i] < target){
-                count++
-            }
-        }
-    }
-    return count
+// /**
+//  * @param {number[]} nums
+//  * @param {number} target
+//  * @return {number}
+//  */
+// var searchInsert = function(nums, target) {
+//   //establish a count var for the secondary case if the target doesn't exist
+//     let count = 0
+//     for (let i = 0; i < nums.length; i++){
+//         if(nums[i]===target){
+//             return i
+//         }
+//         else {
+//           //check if the num is less than the target -- if it is, the count is incremented and will be one less
+//             if(nums[i] < target){
+//                 count++
+//             }
+//         }
+//     }
+//     return count
+// };
+
+// #112. Path Sum
+// Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+
+// A leaf is a node with no children.
+
+var hasPathSum = function (root, targetSum) {
+	//if no root, return false
+	if (!root) return false;
+	//return false if target sum is reached (target sum - root.val = 0)
+	if (targetSum - root.val === 0 && root.right == null && root.left == null)
+		return true;
+	//recursion
+
+	return (
+		hasPathSum(root.left, targetSum - root.val) ||
+		hasPathSum(root.right, targetSum - root.val)
+	);
 };
+console.log(hasPathSum([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1]), 22);//true
