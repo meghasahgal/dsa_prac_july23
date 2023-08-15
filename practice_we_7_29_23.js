@@ -503,19 +503,42 @@ console.log(characterReplacement("AABABBA", 1));
 // #112. Path Sum
 // Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
 
-// A leaf is a node with no children.
+// // A leaf is a node with no children.
 
-var hasPathSum = function (root, targetSum) {
-	//if no root, return false
-	if (!root) return false;
-	//return false if target sum is reached (target sum - root.val = 0)
-	if (targetSum - root.val === 0 && root.right == null && root.left == null)
-		return true;
-	//recursion
+// var hasPathSum = function (root, targetSum) {
+// 	//if no root, return false
+// 	if (!root) return false;
+// 	//return false if target sum is reached (target sum - root.val = 0)
+// 	if (targetSum - root.val === 0 && root.right == null && root.left == null)
+// 		return true;
+// 	//recursion
 
-	return (
-		hasPathSum(root.left, targetSum - root.val) ||
-		hasPathSum(root.right, targetSum - root.val)
-	);
+// 	return (
+// 		hasPathSum(root.left, targetSum - root.val) ||
+// 		hasPathSum(root.right, targetSum - root.val)
+// 	);
+// };
+// console.log(hasPathSum([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1]), 22);//true
+
+// #94. Binary Tree Inorder Traversal
+
+// Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+
+
+var inorderTraversal = function (root) {
+	let res = [];
+	function order(root) {
+		if (!root) {
+			return;
+		}
+		//recursive calls for left and right nodes
+		order(root.left);
+		res.push(root.val);
+		order(root.right);
+	}
+
+	// call the recursive function
+	order(root);
+	return res;
 };
-console.log(hasPathSum([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1]), 22);//true
