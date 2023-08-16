@@ -526,19 +526,34 @@ console.log(characterReplacement("AABABBA", 1));
 
 
 
-var inorderTraversal = function (root) {
-	let res = [];
-	function order(root) {
-		if (!root) {
-			return;
-		}
-		//recursive calls for left and right nodes
-		order(root.left);
-		res.push(root.val);
-		order(root.right);
-	}
+// var inorderTraversal = function (root) {
+// 	let res = [];
+//   // recursive function
+// 	function order(root) {
+// 		if (!root) {
+// 			return;
+// 		}
+// 		//recursive calls for left and right nodes
+// 		order(root.left);
+// 		res.push(root.val);
+// 		order(root.right);
+// 	}
 
-	// call the recursive function
-	order(root);
-	return res;
+// 	// call the recursive function
+// 	order(root);
+// 	return res;
+// };
+
+
+// 100. Same Tree
+
+// Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+
+// Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+
+var isSameTree = function (p, q) {
+	return JSON.stringify(p) === JSON.stringify(q);
 };
+
+console.log(isSameTree([1, 2, 3], [1, 2, 3]));//true
