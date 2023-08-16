@@ -557,3 +557,15 @@ var isSameTree = function (p, q) {
 };
 
 console.log(isSameTree([1, 2, 3], [1, 2, 3]));//true
+
+///dfs approach
+
+var isSameTree = function (p, q) {
+//if both are null return true, if vals are different return false (base cases)
+  if (!p && !q) return true;
+  if(!p || !q || p.val !== q.val) return false;
+
+  //recurse
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+
+}
