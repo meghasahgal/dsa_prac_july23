@@ -581,9 +581,35 @@ var isSameTree = function (p, q) {
 
 // Return the integer denoting the number of employees who worked at least target hours.
 
-var numberOfEmployeesWhoMetTarget = function (hours, target) {
-	let count = hours.filter((hours) => hours >= target);
-	return count.length;
-};
+// var numberOfEmployeesWhoMetTarget = function (hours, target) {
+// 	let count = hours.filter((hours) => hours >= target);
+// 	return count.length;
+// };
 
-console.log(numberOfEmployeesWhoMetTarget([0, 1, 2, 3, 4], 2));
+// console.log(numberOfEmployeesWhoMetTarget([0, 1, 2, 3, 4], 2));
+
+
+// //2806. Account Balance After Rounded Purchas
+// Initially, you have a bank account balance of 100 dollars.
+
+// You are given an integer purchaseAmount representing the amount you will spend on a purchase in dollars.
+
+// At the store where you will make the purchase, the purchase amount is rounded to the nearest multiple of 10. In other words, you pay a non-negative amount, roundedAmount, such that roundedAmount is a multiple of 10 and abs(roundedAmount - purchaseAmount) is minimized.
+
+// If there is more than one nearest multiple of 10, the largest multiple is chosen.
+
+// Return an integer denoting your account balance after making a purchase worth purchaseAmount dollars from the store.
+
+// Note: 0 is considered to be a multiple of 10 in this problem.
+
+
+/**
+ * @param {number} purchaseAmount
+ * @return {number}
+ */
+var accountBalanceAfterPurchase = function(purchaseAmount) {
+    return 100 - Math.round(purchaseAmount / 10) * 10
+    }
+
+    // 22 --> remainder is 2, round down to 10 * 2
+    // 26 ---> remainder is 6, round up to 10 * 3
