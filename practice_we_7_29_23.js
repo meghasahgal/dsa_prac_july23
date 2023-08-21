@@ -552,23 +552,23 @@ console.log(characterReplacement("AABABBA", 1));
 // Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
 
 
-var isSameTree = function (p, q) {
-	return JSON.stringify(p) === JSON.stringify(q);
-};
+// var isSameTree = function (p, q) {
+// 	return JSON.stringify(p) === JSON.stringify(q);
+// };
 
-console.log(isSameTree([1, 2, 3], [1, 2, 3]));//true
+// console.log(isSameTree([1, 2, 3], [1, 2, 3]));//true
 
-///dfs approach
+// ///dfs approach
 
-var isSameTree = function (p, q) {
-//if both are null return true, if vals are different return false (base cases)
-  if (!p && !q) return true;
-  if(!p || !q || p.val !== q.val) return false;
+// var isSameTree = function (p, q) {
+// //if both are null return true, if vals are different return false (base cases)
+//   if (!p && !q) return true;
+//   if(!p || !q || p.val !== q.val) return false;
 
-  //recurse
-  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+//   //recurse
+//   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
 
-}
+// }
 
 
 // #2798. Number of Employees Who Met the Target
@@ -604,12 +604,49 @@ var isSameTree = function (p, q) {
 
 
 /**
- * @param {number} purchaseAmount
- * @return {number}
- */
-var accountBalanceAfterPurchase = function(purchaseAmount) {
-    return 100 - Math.round(purchaseAmount / 10) * 10
-    }
+//  * @param {number} purchaseAmount
+//  * @return {number}
+//  */
+// var accountBalanceAfterPurchase = function(purchaseAmount) {
+//     return 100 - Math.round(purchaseAmount / 10) * 10
+//     }
 
     // 22 --> remainder is 2, round down to 10 * 2
     // 26 ---> remainder is 6, round up to 10 * 3
+
+
+
+    /**
+     *
+*2815. Max Pair Sum in an Array
+Easy
+172
+64
+Companies
+You are given a 0-indexed integer array nums. You have to find the maximum sum of a pair of numbers from nums such that the maximum digit in both numbers are equal.
+
+Return the maximum sum or -1 if no such pair exists.
+
+
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSum = function(nums) {
+    if (nums.length < 2) return -1
+    let max = -1
+    for(let i = 0; i < nums.length; i++){
+      for (let j = i+1; j < nums.length; j++){
+        let el1=Math.max(...String(nums[i]).split(''))
+        let el2=Math.max(...String(nums[j]).split(''));
+        console.log(el1, "el1")
+            console.log(el2, "el2")
+            if(el1===el2){
+                max=Math.max(nums[i]+nums[j], max)
+            }
+
+        }
+    }
+    return max
+};
+
+console.log(maxSum([51, 71, 17, 24, 42]));
