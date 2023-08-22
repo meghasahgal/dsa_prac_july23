@@ -628,25 +628,76 @@ You are given a 0-indexed integer array nums. You have to find the maximum sum o
 Return the maximum sum or -1 if no such pair exists.
 
 
- * @param {number[]} nums
- * @return {number}
- */
-var maxSum = function(nums) {
-    if (nums.length < 2) return -1
-    let max = -1
-    for(let i = 0; i < nums.length; i++){
-      for (let j = i+1; j < nums.length; j++){
-        let el1=Math.max(...String(nums[i]).split(''))
-        let el2=Math.max(...String(nums[j]).split(''));
-        console.log(el1, "el1")
-            console.log(el2, "el2")
-            if(el1===el2){
-                max=Math.max(nums[i]+nums[j], max)
-            }
+//  * @param {number[]} nums
+//  * @return {number}
+//  */
+// var maxSum = function(nums) {
+//     if (nums.length < 2) return -1
+//     let max = -1
+//     for(let i = 0; i < nums.length; i++){
+//       for (let j = i+1; j < nums.length; j++){
+//         let el1=Math.max(...String(nums[i]).split(''))
+//         let el2=Math.max(...String(nums[j]).split(''));
+//         console.log(el1, "el1")
+//             console.log(el2, "el2")
+//             if(el1===el2){
+//                 max=Math.max(nums[i]+nums[j], max)
+//             }
 
+//         }
+//     }
+//     return max
+// };
+
+// console.log(maxSum([51, 71, 17, 24, 42]));
+
+
+// 735. Asteroid Collision
+
+// We are given an array asteroids of integers representing asteroids in a row.
+
+// For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
+
+// Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
+
+
+
+// Example 1:
+
+// Input: asteroids = [5,10,-5]
+// Output: [5,10]
+// Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
+
+/**
+ * @param {number[]} asteroids
+ * @return {number[]}
+ */
+var asteroidCollision = function(asteroids) {
+    let stack = [];
+    //iterate through array
+    for (let i =0; i < asteroids.length; i++){
+        while(stack.length && asteroids[i] < 0 && stack[stack.length-1] > 0){
+            //get abs vals of two pointers for comp purposes
+            const leftAsteroid = Math.abs(asteroids[i]);
+            const rightAsteroid = Math.abs(stack[stack.length -1]);
+
+            if(leftAsteroid > rightAsteroid){
+                stack.pop()//top of stack is destroyed
+            }else if(leftAsteroid < rightAsteroid){
+                asteroids[i] = 0 // current asteroid moving left is destroyed
+                break;
+            }else{
+                stack.pop() // both asteroids are same size, so destroyed
+                asteroids[i] = 0;
+                break;
+            }
+        }
+    // Add the current asteroid to the stack if it hasn't been destroyed
+
+        if(asteroids[i] !== 0){
+            stack.push(asteroids[i])
         }
     }
-    return max
-};
+    return stack
 
-console.log(maxSum([51, 71, 17, 24, 42]));
+};
