@@ -401,48 +401,48 @@ Given a string s consisting of words and spaces, return the length of the last w
 
 // #424 Longest Repeating Character
 /**
- * @param {string} s
- * @param {number} k
- * @return {number}
- */
-var characterReplacement = function(s, k) {
-   //use a hash to get counts; used to transform a given key into a specific slot index. it is used to map each and every possible key into a unique slot index.
-   // use two pointers for right and left
-   let hash = {};
-   let res = 0;
-   let left = 0;
-   let max = 0;
+//  * @param {string} s
+//  * @param {number} k
+//  * @return {number}
+//  */
+// var characterReplacement = function(s, k) {
+//    //use a hash to get counts; used to transform a given key into a specific slot index. it is used to map each and every possible key into a unique slot index.
+//    // use two pointers for right and left
+//    let hash = {};
+//    let res = 0;
+//    let left = 0;
+//    let max = 0;
 
-   for(let right = 0; right < s.length; right++){
-     //if char exists, add 1, else assign to 1
-     if(hash[s[right]]) {
-       hash[s[right]]++
-     }
-     else{
-       hash[s[right]] = 1;
+//    for(let right = 0; right < s.length; right++){
+//      //if char exists, add 1, else assign to 1
+//      if(hash[s[right]]) {
+//        hash[s[right]]++
+//      }
+//      else{
+//        hash[s[right]] = 1;
 
-     }
-     console.log(right, "right")
-     console.log(hash[s[right]], "hash key as s at right")
-     // max is maxiumn of the max and current hash of the key at the s's right index
-       max = Math.max(max, hash[s[right]])
-       console.log(max, "max between max and the key at the right index")
+//      }
+//      console.log(right, "right")
+//      console.log(hash[s[right]], "hash key as s at right")
+//      // max is maxiumn of the max and current hash of the key at the s's right index
+//        max = Math.max(max, hash[s[right]])
+//        console.log(max, "max between max and the key at the right index")
 
-       while (right - left +1 - max > k){
-         hash[s[left]]--;
-         left++
-       }
-       res=Math.max(res, right-left+1)
-       console.log(res, "res")
-       console.log(left, "left")
+//        while (right - left +1 - max > k){
+//          hash[s[left]]--;
+//          left++
+//        }
+//        res=Math.max(res, right-left+1)
+//        console.log(res, "res")
+//        console.log(left, "left")
 
-   }
-   return res;
+//    }
+//    return res;
 
 
-};
+// };
 
-console.log(characterReplacement("AABABBA", 1));
+// console.log(characterReplacement("AABABBA", 1));
 //another sol
 // const characterReplacement = (s, k) => {
 // 	const map = {};
@@ -668,36 +668,55 @@ Return the maximum sum or -1 if no such pair exists.
 // Output: [5,10]
 // Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
 
-/**
- * @param {number[]} asteroids
- * @return {number[]}
- */
-var asteroidCollision = function(asteroids) {
-    let stack = [];
-    //iterate through array
-    for (let i =0; i < asteroids.length; i++){
-        while(stack.length && asteroids[i] < 0 && stack[stack.length-1] > 0){
-            //get abs vals of two pointers for comp purposes
-            const leftAsteroid = Math.abs(asteroids[i]);
-            const rightAsteroid = Math.abs(stack[stack.length -1]);
+// /**
+//  * @param {number[]} asteroids
+//  * @return {number[]}
+//  */
+// var asteroidCollision = function(asteroids) {
+//     let stack = [];
+//     //iterate through array
+//     for (let i =0; i < asteroids.length; i++){
+//         while(stack.length && asteroids[i] < 0 && stack[stack.length-1] > 0){
+//             //get abs vals of two pointers for comp purposes
+//             const leftAsteroid = Math.abs(asteroids[i]);
+//             const rightAsteroid = Math.abs(stack[stack.length -1]);
 
-            if(leftAsteroid > rightAsteroid){
-                stack.pop()//top of stack is destroyed
-            }else if(leftAsteroid < rightAsteroid){
-                asteroids[i] = 0 // current asteroid moving left is destroyed
-                break;
-            }else{
-                stack.pop() // both asteroids are same size, so destroyed
-                asteroids[i] = 0;
-                break;
-            }
-        }
-    // Add the current asteroid to the stack if it hasn't been destroyed
+//             if(leftAsteroid > rightAsteroid){
+//                 stack.pop()//top of stack is destroyed
+//             }else if(leftAsteroid < rightAsteroid){
+//                 asteroids[i] = 0 // current asteroid moving left is destroyed
+//                 break;
+//             }else{
+//                 stack.pop() // both asteroids are same size, so destroyed
+//                 asteroids[i] = 0;
+//                 break;
+//             }
+//         }
+//     // Add the current asteroid to the stack if it hasn't been destroyed
 
-        if(asteroids[i] !== 0){
-            stack.push(asteroids[i])
-        }
-    }
-    return stack
+//         if(asteroids[i] !== 0){
+//             stack.push(asteroids[i])
+//         }
+//     }
+//     return stack
 
+// };
+
+var increasingTriplet = function (nums) {
+	let firstNumber = Infinity,
+		secondNumber = Infinity;
+
+	for (let thirdNumber of nums) {
+		if (thirdNumber > firstNumber && thirdNumber > secondNumber) {
+			return true;
+		}
+
+		if (thirdNumber > firstNumber) {
+			secondNumber = thirdNumber;
+		} else {
+			firstNumber = thirdNumber;
+		}
+	}
+
+	return false;
 };

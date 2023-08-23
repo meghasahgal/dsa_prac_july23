@@ -176,22 +176,79 @@ Input: s1 = "this apple is sweet", s2 = "this apple is sour"
 Output: ["sweet","sour"]
 */
 
-var uncommonFromSentences = function(s1, s2) {
-    let res ={}
-    //convert string to array in order to iterate and create a count of each word; 1 if it's not there yet
-    s1.split(" ").forEach(word =>{
-        res[word] = ++res[word] || 1
-    })
+// var uncommonFromSentences = function(s1, s2) {
+//     let res ={}
+//     //convert string to array in order to iterate and create a count of each word; 1 if it's not there yet
+//     s1.split(" ").forEach(word =>{
+//         res[word] = ++res[word] || 1
+//     })
 
-     s2.split(" ").forEach(word =>{
-        res[word] = ++res[word] || 1
-    })
-    // console.log(res, "RES")
+//      s2.split(" ").forEach(word =>{
+//         res[word] = ++res[word] || 1
+//     })
+//     // console.log(res, "RES")
 
-    //return the unique keys where the word count is equal to one
+//     //return the unique keys where the word count is equal to one
 
-    return Object.keys(res).filter(word => res[word] === 1)
-    // console.log(res)
-};
+//     return Object.keys(res).filter(word => res[word] === 1)
+//     // console.log(res)
+// };
 
-console.log(uncommonFromSentences("yo", "hello yo"))
+// console.log(uncommonFromSentences("yo", "hello yo"))
+
+
+function hasMeetingConflict(meetingTimes, duration) {
+	// Validate input
+	if (
+		!Array.isArray(meetingTimes) ||
+		!meetingTimes.every(isValidMilitaryTime) ||
+		!Number.isInteger(duration)
+	) {
+		return "error";
+	}
+
+	// Sort the meeting times in ascending order
+	meetingTimes.sort();
+
+	// Helper function to add minutes to a military time string
+	function addMinutes(time, minutes) {
+		const [hours, mins] = time.split(":").map(Number);
+		const totalMinutes = hours * 60 + mins + minutes;
+		const newHours = Math.floor(totalMinutes / 60);
+		const newMins = totalMinutes % 60;
+		return `${String(newHours).padStart(2, "0")}:${String(newMins).padStart(
+			2,
+			"0"
+		)}`;
+	}
+
+	// Initialize conflict count
+	let conflictCount = 0;
+	let conflictTime = 0; // Initialize as an integer
+
+	// Check for conflicts
+	for (let i = 0; i < meetingTimes.length - 1; i++) {
+		const currentMeetingEnd = addMinutes(meetingTimes[i], duration);
+		const nextMeetingStart = meetingTimes[i + 1];
+
+		if (currentMeetingEnd > nextMeetingStart) {
+			conflictCount++;
+			// Calculate the conflict time as an integer in minutes
+			conflictTime +=
+				currentMeetingEnd > nextMeetingStart
+					? currentMeetingEnd - nextMeetingStart
+					: 0;
+		}
+	}
+
+	return {
+		conflicts: conflictCount,
+		conflictTime: conflictTime, // Return as an integer in minutes
+	};
+}
+
+// Example usage:
+const meetingTimes = ["09:00", "10:30", "12:00", "14:00"];
+const duration = 90;
+const result = hasMeetingConflict(meetingTimes, duration);
+console.log(result); // Output: { conflicts: 2, conflictTime: 90 }
