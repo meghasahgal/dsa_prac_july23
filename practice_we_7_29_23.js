@@ -702,21 +702,37 @@ Return the maximum sum or -1 if no such pair exists.
 
 // };
 
-var increasingTriplet = function (nums) {
-	let firstNumber = Infinity,
-		secondNumber = Infinity;
+// var increasingTriplet = function (nums) {
+// 	let firstNumber = Infinity,
+// 		secondNumber = Infinity;
 
-	for (let thirdNumber of nums) {
-		if (thirdNumber > firstNumber && thirdNumber > secondNumber) {
-			return true;
-		}
+// 	for (let thirdNumber of nums) {
+// 		if (thirdNumber > firstNumber && thirdNumber > secondNumber) {
+// 			return true;
+// 		}
 
-		if (thirdNumber > firstNumber) {
-			secondNumber = thirdNumber;
-		} else {
-			firstNumber = thirdNumber;
-		}
-	}
+// 		if (thirdNumber > firstNumber) {
+// 			secondNumber = thirdNumber;
+// 		} else {
+// 			firstNumber = thirdNumber;
+// 		}
+// 	}
 
-	return false;
+// 	return false;
+// };
+
+// 67. Add Binary
+
+// Given two binary strings a and b, return their sum as a binary string.
+
+
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function(a, b) {
+    //convert to int with BigInt and then back to binary string with toString
+
+    return(BigInt('0b'+a) + BigInt('0b'+b)).toString(2)
 };
