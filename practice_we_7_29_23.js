@@ -726,13 +726,36 @@ Return the maximum sum or -1 if no such pair exists.
 // Given two binary strings a and b, return their sum as a binary string.
 
 
-/**
- * @param {string} a
- * @param {string} b
- * @return {string}
- */
-var addBinary = function(a, b) {
-    //convert to int with BigInt and then back to binary string with toString
+// /**
+//  * @param {string} a
+//  * @param {string} b
+//  * @return {string}
+//  */
+// var addBinary = function(a, b) {
+//     //convert to int with BigInt and then back to binary string with toString
 
-    return(BigInt('0b'+a) + BigInt('0b'+b)).toString(2)
+//     return(BigInt('0b'+a) + BigInt('0b'+b)).toString(2)
+// };
+
+
+// #101. Symmetric Tree
+
+// Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+var isSymmetric = function (root) {
+	if (!root) return true;
+	return check(root.left, root.right);
+};
+
+//helper function to check for symmetry
+const check = function (leftNode, rightNode) {
+	//edge andcase
+	if (!leftNode && !rightNode) return true;
+	//if left node or right node doesn't exist, return false
+	if (!leftNode || !rightNode) return false;
+	//if the leftNode's val doesn't equal the rightNode's val, return false (they are not mirrors)
+	if (leftNode.val !== rightNode.val) return false;
+	return (
+		check(leftNode.left, rightNode.right) &&
+		check(leftNode.right, rightNode.left)
+	);
 };
