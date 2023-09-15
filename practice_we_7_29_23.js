@@ -748,7 +748,7 @@ var isSymmetric = function (root) {
 
 //helper function to check for symmetry
 const check = function (leftNode, rightNode) {
-	//edge andcase
+	//edge and base case
 	if (!leftNode && !rightNode) return true;
 	//if left node or right node doesn't exist, return false
 	if (!leftNode || !rightNode) return false;
