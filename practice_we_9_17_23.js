@@ -80,3 +80,29 @@ var deleteDuplicates = function (head) {
 
 	return current;
 };
+
+
+// 128. Longest Consecutive Sequence
+// Medium
+
+// Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+
+// You must write an algorithm that runs in O(n) time.
+var longestConsecutive = function (nums) {
+	let set = new Set(nums);
+	let max = 0;
+	for (let num of nums) {
+		//for each number in the array, if the number minus 1 is not present in the set, it means the current number is the start of a consecutive sequence.
+		if (!set.has(num - 1)) {
+			let temp = num,
+				current = 0;
+			while (set.has(temp++)) {
+				current++;
+				max = Math.max(current, max);
+			}
+		}
+	}
+	return max;
+};
+
+console.log(longestConsecutive([100, 4, 200, 1, 3, 2]));//4
