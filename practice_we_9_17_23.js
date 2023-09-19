@@ -38,28 +38,25 @@
 
 // Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
 
-var gcdOfStrings = function(str1, str2) {
-// if two strings have a common divider, the combination of the two strings should be equal
+var gcdOfStrings = function (str1, str2) {
+	// if two strings have a common divider, the combination of the two strings should be equal
 
-     if ((str1 + str2) !== (str2 + str1)){
-         return ""
-     }
-    //recursive function
-    const gcd = (a,b)=>{
-        if(!b){
-            return a
-        }
+	if (str1 + str2 !== str2 + str1) {
+		return "";
+	}
+	//recursive function
+	const gcd = (a, b) => {
+		if (!b) {
+			return a;
+		}
 
-   return gcd(b, a%b)
-    }
-   var gcdLength = gcd(str1.length, str2.length)
-   return str1.substr(0, gcdLength)
-
-
+		return gcd(b, a % b);
+	};
+	var gcdLength = gcd(str1.length, str2.length);
+	return str1.substr(0, gcdLength);
 };
 
-console.log(gcdOfStrings("ABCABC", "ABC"));///ABC
-
+console.log(gcdOfStrings("ABCABC", "ABC")); ///ABC
 
 // 83. Remove Duplicates from Sorted List
 
@@ -80,7 +77,6 @@ var deleteDuplicates = function (head) {
 
 	return current;
 };
-
 
 // 128. Longest Consecutive Sequence
 // Medium
@@ -105,4 +101,32 @@ var longestConsecutive = function (nums) {
 	return max;
 };
 
-console.log(longestConsecutive([100, 4, 200, 1, 3, 2]));//4
+console.log(longestConsecutive([100, 4, 200, 1, 3, 2])); //4
+
+// 205. Isomorphic Strings
+
+// Given two strings s and t, determine if they are isomorphic.
+
+// Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+
+// All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.
+
+var isIsomorphic = function (s, t) {
+	if (s.length !== t.length) {
+		return false;
+	}
+	// map will store key vals
+	let m = new Map();
+	for (let i = 0; i < s.length; i++) {
+		if (!m.has(s[i])) {
+			m.set(s[i], t[i]);
+		} else {
+			//if there are dup values, it means that multiple keys map to the same val, which is not allowed
+
+			if (m.get(s[i]) != t[i]) {
+				return false;
+			}
+		}
+	}
+	return new Set([...m.values()]).size == m.size;
+};
