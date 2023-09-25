@@ -184,3 +184,11 @@ const robHouses = (nums, startIdx, endIdx) => {
   return rob2;
 }
 ;
+
+//#215
+var findKthLargest = function(nums, k) {
+       nums.sort((a,b) => a - b).reverse();
+
+    return nums[k-1];
+
+};
