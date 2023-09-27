@@ -133,65 +133,65 @@
 
 //206. Reverse Linked List
 
-// Given the head of a singly linked list, reverse the list, and return the reversed list.
-var reverseList = function (head) {
-	// prev pointer keeps track of the reversed list
-	// current pointer used to traverse the list
-	// next pointer is used to temporarily store the next node in the original list so we can reverse the pointers for each node.
-	let current = head;
-	let prev = null;
-	let next = null;
-	while (current) {
-		//save next
-		next = current.next;
-		console.log(next, "next")
-		//reverse
-		current.next = prev;
+// // Given the head of a singly linked list, reverse the list, and return the reversed list.
+// var reverseList = function (head) {
+// 	// prev pointer keeps track of the reversed list
+// 	// current pointer used to traverse the list
+// 	// next pointer is used to temporarily store the next node in the original list so we can reverse the pointers for each node.
+// 	let current = head;
+// 	let prev = null;
+// 	let next = null;
+// 	while (current) {
+// 		//save next
+// 		next = current.next;
+// 		console.log(next, "next")
+// 		//reverse
+// 		current.next = prev;
 
-		//advance prev and current
-		prev = current;
-		console.log(prev, "prev");
+// 		//advance prev and current
+// 		prev = current;
+// 		console.log(prev, "prev");
 
-		current = next;
-		console.log(current, "current")
-	}
-	return prev;
-	console.log(prev, "prev")
-};
+// 		current = next;
+// 		console.log(current, "current")
+// 	}
+// 	return prev;
+// 	console.log(prev, "prev")
+// };
 
-console.log(reverseList([1, 2, 3, 4, 5]));
+// console.log(reverseList([1, 2, 3, 4, 5]));
 
 
-ar rob = function(nums) {
-     if (nums.length === 1) return nums[0];
+// var rob = function(nums) {
+//      if (nums.length === 1) return nums[0];
 
-  const includeFirst = robHouses(nums, 0, nums.length-1);
-  const excludeFirst = robHouses(nums, 1, nums.length)
-  return Math.max(includeFirst, excludeFirst);
-};
+//   const includeFirst = robHouses(nums, 0, nums.length-1);
+//   const excludeFirst = robHouses(nums, 1, nums.length)
+//   return Math.max(includeFirst, excludeFirst);
+// };
 
-const robHouses = (nums, startIdx, endIdx) => {
-  // stores max amount robbed from previous 2 houses
-  let rob1 = 0;
-  let rob2 = 0;
+// const robHouses = (nums, startIdx, endIdx) => {
+//   // stores max amount robbed from previous 2 houses
+//   let rob1 = 0;
+//   let rob2 = 0;
 
-  for (let i = startIdx; i < endIdx; i++) {
-    // we can't rob 2 adjacent houses so curr amount (nums[i]) can only be added to rob1
-    let newRob = Math.max(nums[i] + rob1, rob2);
-    rob1 = rob2;
-    rob2 = newRob;
-  }
-  return rob2;
-}
-;
+//   for (let i = startIdx; i < endIdx; i++) {
+//     // we can't rob 2 adjacent houses so curr amount (nums[i]) can only be added to rob1
+//     let newRob = Math.max(nums[i] + rob1, rob2);
+//     rob1 = rob2;
+//     rob2 = newRob;
+//   }
+//   return rob2;
+// }
+// ;
 
 //#215
-var findKthLargest = function(nums, k) {
-       nums.sort((a,b) => a - b).reverse();
+// var findKthLargest = function(nums, k) {
+//        nums.sort((a,b) => a - b).reverse();
 
-    return nums[k-1];
+//     return nums[k-1];
 
-};
+// };
 
 // #209
 // Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
@@ -199,16 +199,30 @@ var findKthLargest = function(nums, k) {
 //  * @param {number} k
 //  * @return {boolean}
 //  */
-var containsNearbyDuplicate = function(nums, k) {
-    for (let i=0; i < nums.length; i++){
-         let j = nums.length-1
-         while(i < j){
-             if(nums[i] == nums[j] && Math.abs(i-j) <=k){
-                 return true;
-             }
-         j--
-         }
-    }
+// var containsNearbyDuplicate = function(nums, k) {
+//     for (let i=0; i < nums.length; i++){
+//          let j = nums.length-1
+//          while(i < j){
+//              if(nums[i] == nums[j] && Math.abs(i-j) <=k){
+//                  return true;
+//              }
+//          j--
+//          }
+//     }
 
-    return false
-};
+//     return false
+// };
+
+ const x = 2;
+ let y = 4;
+ function update(arg)
+ { return Math.random() + y * arg;
+ }
+  y = 2;
+  y=3
+//    ?;
+
+ const result = update(x); // 6-7
+console.log(update(x))
+console.log(y, "y")
+console.log(x, "x")
