@@ -213,16 +213,22 @@
 //     return false
 // };
 
- const x = 2;
- let y = 4;
- function update(arg)
- { return Math.random() + y * arg;
- }
-  y = 2;
-  y=3
-//    ?;
+//  const x = 2;
+//  let y = 4;
+//  function update(arg)
+//  { return Math.random() + y * arg;
+//  }
+//   y = 2;
+//   y=3
+// //    ?;
 
- const result = update(x); // 6-7
-console.log(update(x))
-console.log(y, "y")
-console.log(x, "x")
+//  const result = update(x); // 6-7
+// console.log(update(x))
+// console.log(y, "y")
+// console.log(x, "x")
+
+// #222 Count Complete Tree Nodes
+var countNodes = function (root) {
+	if (!root) return 0;
+	return countNodes(root.left) + countNodes(root.right) + 1;
+};
