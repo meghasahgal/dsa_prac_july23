@@ -228,7 +228,47 @@
 // console.log(x, "x")
 
 // #222 Count Complete Tree Nodes
-var countNodes = function (root) {
-	if (!root) return 0;
-	return countNodes(root.left) + countNodes(root.right) + 1;
+// var countNodes = function (root) {
+// 	if (!root) return 0;
+// 	return countNodes(root.left) + countNodes(root.right) + 1;
+// };
+
+// // #225 Implement Stack using Queues
+// The insertion in a stack is called a push, whereas the deletion in a stack is called a pop.
+
+// However, the insertion and deletion from the stack could be done from one end only.
+// It has a single pointer called top which points to the topmost element of the stack and insertion
+// as well as deletion is performed by manipulating the top pointer only.
+ var MyStack = function(array) {
+    this.queue = [];
+};
+
+/**
+ * @param {number} x
+ * @return {void}
+ */
+MyStack.prototype.push = function(x) {
+    return this.queue.push(x);
+};
+
+/**
+ * @return {number}
+ */
+MyStack.prototype.pop = function() {
+    return this.queue.pop();
+};
+
+/**
+ * @return {number}
+ */
+// last element of a stack is the top
+MyStack.prototype.top = function() {
+    return this.queue[this.queue.length-1];
+};
+
+/**
+ * @return {boolean}
+ */
+MyStack.prototype.empty = function() {
+    return this.queue.length === 0;
 };
