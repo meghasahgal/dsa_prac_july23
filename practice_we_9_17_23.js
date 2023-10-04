@@ -339,3 +339,19 @@ var summaryRanges = function (nums) {
 };
 
 console.log(summaryRanges([0, 2, 3, 4, 6, 8, 9]));
+
+
+/**
+ * 231. Power of Two
+
+Given an integer n, return true if it is a power of two. Otherwise, return false.
+
+An integer n is a power of two, if there exists an integer x such that n == 2x.
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfTwo = function(n) {
+    return Math.log2(n) % 1 == 0
+}
+
+//𝙼𝚊𝚝𝚑.𝚕𝚘𝚐𝟸(x) = 2^x  = n
