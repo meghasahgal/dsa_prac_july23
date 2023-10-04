@@ -351,7 +351,29 @@ An integer n is a power of two, if there exists an integer x such that n == 2x.
  * @return {boolean}
  */
 var isPowerOfTwo = function(n) {
+	// if perfectly divisible by 1, then true else false
     return Math.log2(n) % 1 == 0
 }
 
 //𝙼𝚊𝚝𝚑.𝚕𝚘𝚐𝟸(x) = 2^x  = n
+
+
+//#234 Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+* @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+    let stack = []
+    let curr = head
+    //place the curr list nodes in a stack
+    while(curr){
+        stack.push(curr.val)
+        curr = curr.next
+    }
+    //check if last val of stack is equal to the first val of the list node
+    while(head){
+        if(head.val != stack.pop()) return false
+        head=head.next
+    }
+    return true
+};
