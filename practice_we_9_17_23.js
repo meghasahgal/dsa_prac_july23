@@ -358,10 +358,10 @@ var isPowerOfTwo = function(n) {
 //𝙼𝚊𝚝𝚑.𝚕𝚘𝚐𝟸(x) = 2^x  = n
 
 
-//#234 Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
-* @param {ListNode} head
- * @return {boolean}
- */
+// //#234 Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+// * @param {ListNode} head
+//  * @return {boolean}
+//  */
 var isPalindrome = function(head) {
     let stack = []
     let curr = head
@@ -376,4 +376,17 @@ var isPalindrome = function(head) {
         head=head.next
     }
     return true
+};
+
+
+/** LC 242
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    s = s.split("").sort().join()
+    t = t.split("").sort().join()
+
+    return s===t
 };
