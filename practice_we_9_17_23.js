@@ -390,3 +390,70 @@ var isAnagram = function(s, t) {
 
     return s===t
 };
+
+
+// LC #278 First Bad Version
+/**
+ * Definition for isBadVersion()
+ *
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+var solution = function(isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+        let start = 1
+        let end = n
+
+        while(start <= end){
+            //find the mid
+        const mid = Math.floor((start + end) / 2)
+        //if it isn't a bad version, increment the start, else decrement the mid
+        if(!isBadVersion(mid)){
+            start = mid + 1
+        }
+        else{
+            end = mid - 1
+        }
+        }
+        // return start once the bad version is hit
+        return start;
+
+        }
+    };
+
+
+// / Iterative function to implement Binary Search
+// let iterativeFunction = function (arr, x) {
+
+//     let start=0, end=arr.length-1;
+
+//     // Iterate while start not meets end
+//     while (start<=end){
+
+//         // Find the mid index
+//         let mid=Math.floor((start + end)/2);
+
+//         // If element is present at mid, return True
+//         if (arr[mid]===x) return true;
+
+//         // Else look in left or right half accordingly
+//         else if (arr[mid] < x)
+//              start = mid + 1;
+//         else
+//              end = mid - 1;
+//     }
+
+//     return false;
+// }
