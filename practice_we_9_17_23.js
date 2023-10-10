@@ -457,3 +457,13 @@ var solution = function(isBadVersion) {
 
 //     return false;
 // }
+
+
+/**
+ * @param {number} dividend
+ * @param {number} divisor
+ * @return {number}
+ */
+var divide = function(dividend, divisor) {
+    return Math.min(Math.max(Math.trunc(dividend /  divisor),-(2**31)))
+};
