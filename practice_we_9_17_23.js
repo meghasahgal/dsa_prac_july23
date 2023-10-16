@@ -486,3 +486,16 @@ var climbStairs = function (n) {
 		return memo[n];
 	}
 };
+
+// 88. Merge Sorted Array
+
+
+var merge = function (nums1, m, nums2, n) {
+	for (let n = nums2.length - 1; n >= 0; n--) {
+		nums1[n + m] = nums2[n];
+	}
+
+	nums1.sort((a, b) => a - b);
+
+	return nums1;
+};
